@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
 });
 
 
-app.get("/:cNum", function (req, res) {
+app.get("/cn/:cNum", function (req, res) {
      
     var comicNum = req.params.cNum;
     if(comicNum != "favicon.ico")
@@ -112,7 +112,7 @@ app.post('/', function (req, res) {
     {
         comicNum = 1;
     }
-    res.redirect("/" + comicNum);
+    res.redirect("/cn/" + comicNum);
 })
 
 
