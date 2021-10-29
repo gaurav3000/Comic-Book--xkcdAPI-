@@ -34,13 +34,13 @@ app.get('/', function (req, res) {
 });
 
 
-app.get("/cn/:cNum", function (req, res) {
+app.get("/:cNum", function (req, res) {
      
     var comicNum = req.params.cNum;
         console.log("comic num = " + comicNum);
         if (comicNum > latest) {
             comicNum = 1;
-            res.redirect('/cn/' + comicNum);
+            res.redirect('/' + comicNum);
         }
         else if (comicNum > 0) {
             const url = "https://xkcd.com/" + comicNum + "/info.0.json ";
@@ -109,7 +109,7 @@ app.post('/', function (req, res) {
     {
         comicNum = 1;
     }
-    res.redirect("/cn/" + comicNum);
+    res.redirect("/" + comicNum);
 })
 
 
