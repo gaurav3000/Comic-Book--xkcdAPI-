@@ -16,9 +16,7 @@ var latest;
 app.get('/', function (req, res) {
 
     const url = "https://xkcd.com/info.0.json ";
-    comicNum = 0;
     https.get(url, function (response) {
-        console.log(response.statusCode);
         response.on("data", function (data) {
             var comicData = JSON.parse(data);
             comicNum = comicData.num;
@@ -34,47 +32,48 @@ app.get('/', function (req, res) {
             })
         })
     })
-})
+});
 
 
-app.get('/:cNum', function (req, res) {
+app.get("/:cNum", function (req, res) {
      
     var comicNum = req.params.cNum;
-
-    if (comicNum > latest) {
-        comicNum = 1;
-        res.redirect('/' + comicNum);
-    }
-    else if (comicNum > 0) {
-        const url = "https://xkcd.com/" + comicNum + "/info.0.json ";
-
-        https.get(url, function (response) {
-            console.log(response.statusCode);
-            let chuncks = [];
-            response.on("data", function (data) {
-                chuncks.push(data);
-            }).on('end', function () {
-                let data = Buffer.concat(chuncks);
-                var comicData = JSON.parse(data);
-                console.log(comicData);
-                comicNum = comicData.num;
-                var transcript = comicData.transcript;
-                transcript = transcript.replaceAll("]]", "\n");
-                transcript = transcript.replaceAll("[[", "\n");
-                res.render("home", {
-                    comicNumber: comicData.num,
-                    comicName: comicData.safe_title,
-                    day: comicData.day,
-                    month: comicData.month,
-                    year: comicData.year,
-                    imgSrc: comicData.img,
-                    transcript: transcript,
+    if(comicNum != null)
+    {
+        console.log("comic num = " + comicNum);
+        if (comicNum > latest) {
+            comicNum = 1;
+            res.redirect('/' + comicNum);
+        }
+        else if (comicNum > 0) {
+            const url = "https://xkcd.com/" + comicNum + "/info.0.json ";
+    
+            https.get(url, function (response) {
+                let chuncks = [];
+                response.on("data", function (data) {
+                    chuncks.push(data);
+                }).on('end', function () {
+                    let data = Buffer.concat(chuncks);
+                    var comicData = JSON.parse(data);
+                    comicNum = comicData.num;
+                    var transcript = comicData.transcript;
+                    transcript = transcript.replaceAll("]]", "\n");
+                    transcript = transcript.replaceAll("[[", "\n");
+                    res.render("home", {
+                        comicNumber: comicNum,
+                        comicName: comicData.safe_title,
+                        day: comicData.day,
+                        month: comicData.month,
+                        year: comicData.year,
+                        imgSrc: comicData.img,
+                        transcript: transcript,
+                    })
                 })
             })
-        })
-    }
-    else if (comicNum <= 0) {
-        res.redirect('/');
+        }
+        else if (comicNum <= 0) {
+            res.redirect('/');
+        }
     }
 })
 
