@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
 app.get("/:cNum", function (req, res) {
      
     var comicNum = req.params.cNum;
-    if(comicNum != null)
+    if(comicNum != "favicon.ico")
     {
         console.log("comic num = " + comicNum);
         if (comicNum > latest) {
