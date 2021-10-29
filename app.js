@@ -37,8 +37,6 @@ app.get('/', function (req, res) {
 app.get("/cn/:cNum", function (req, res) {
      
     var comicNum = req.params.cNum;
-    if(comicNum != "favicon.ico")
-    {
         console.log("comic num = " + comicNum);
         if (comicNum > latest) {
             comicNum = 1;
@@ -73,7 +71,6 @@ app.get("/cn/:cNum", function (req, res) {
         else if (comicNum <= 0) {
             res.redirect('/');
         }
-    }
 })
 
 app.post('/', function (req, res) {
