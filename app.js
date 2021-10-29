@@ -40,7 +40,7 @@ app.get("/cn/:cNum", function (req, res) {
         console.log("comic num = " + comicNum);
         if (comicNum > latest) {
             comicNum = 1;
-            res.redirect('/' + comicNum);
+            res.redirect('/cn/' + comicNum);
         }
         else if (comicNum > 0) {
             const url = "https://xkcd.com/" + comicNum + "/info.0.json ";
