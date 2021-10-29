@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Comic Books</title>
+</head>
+
+<body>
+    <div class="Number">
+        <h1>
+            <%= comicName %> (#<%= comicNumber%>)
+        </h1>
+        <p>
+            <%= day%>/<%= month%>/<%= year%>
+        </p>
+    </div>
+    <div class="btn-class">
+        <form action="/" method="post">
+            <button name="navigate" type="submit" value="first" class="btn btn-first"> <span> |< </span> </button>
+            <button name="navigate" type="submit" value="prev" class="btn btn-prev"> <span>Prev</span> </button>
+            <button name="navigate" type="submit" value="Random" class="btn btn-random"> <span>Random</span> </button>
+            <button name="navigate" type="submit" value="next" class="btn btn-next"> <span>Next</span> </button>
+            <button name="navigate" type="submit" value="latest" class="btn btn-latest"> <span> >| </span> </button>
+        </form>
+        
+    </div>
+    <div>
+        <form action="/" method="post">
+            <input type="number" placeholder="Comic Number" name="ComicN" class="input" min="1"><br>
+        <button name="navigate" type="submit" value="search" class="btn btn-search"> <span>Search</span> </button>
+        </form>
+    </div>
+    
+    <div class="strip">
+        <img src="<%=imgSrc%>" alt="Img">
+        <p id="transcript">
+            <%= transcript %>
+        </p>
+    </div>
+    <button id = "t-btn" class = "btn-t btn" onclick="show()"> <span>Show Transcript</span>
+    </button>
+    <div class="btn-class">
+        <form action="/" method="post">
+            <button name="navigate" type="submit" value="first" class="btn btn-first"> <span> |< </span> </button>
+            <button name="navigate" type="submit" value="prev" class="btn btn-prev"> <span>Prev</span> </button>
+            <button name="navigate" type="submit" value="Random" class="btn btn-random"> <span>Random</span> </button>
+            <button name="navigate" type="submit" value="next" class="btn btn-next"> <span>Next</span> </button>
+            <button name="navigate" type="submit" value="latest" class="btn btn-latest"> <span> >| </span> </button>
+        </form>
+    </div>
+</body>
+<script>
+    
+    function show() {
+        var str = document.getElementById("transcript");
+        if (str.style.display == "block") {
+            str.style.display = "none";
+            document.getElementById("t-btn").innerHTML = "Show Transcript";
+        }
+        else {
+            str.style.display = "block";
+            document.getElementById("t-btn").innerHTML = "Hide Transcript";
+        }
+    }
+</script>
+
+</html>
