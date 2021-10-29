@@ -11,10 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 var comicNum = 0;
-var latest;
+var latest = 0;
 
 app.get('/', function (req, res) {
-
     const url = "https://xkcd.com/info.0.json ";
     https.get(url, function (response) {
         response.on("data", function (data) {
@@ -80,6 +79,7 @@ app.get("/:cNum", function (req, res) {
 app.post('/', function (req, res) {
     var btn = req.body.navigate;
     var num = req.body.ComicN;
+    
     if (btn == "prev") {
         if (comicNum < 0) {
             comicNum = 0;
