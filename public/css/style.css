@@ -90,5 +90,5 @@ h1 {
 }
 
 img{
-    width: 50%;
+    max-width: 100%;
 }
